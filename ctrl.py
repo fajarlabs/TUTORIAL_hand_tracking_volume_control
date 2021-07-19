@@ -35,6 +35,7 @@ maxAngle = 180
 angle    = 0
 angleBar = 400
 angleDeg = 0
+angleVol = 0
 minHand  = 50 #50
 maxHand  = 300 #300
 
@@ -47,7 +48,6 @@ while True:
     lmList = detector.findPosition(img, draw=False)
     if len(lmList) != 0:
         # print(lmList[4], lmList[8])
-        print(lmList)
         x1, y1 = lmList[4][1], lmList[4][2]
         x2, y2 = lmList[8][1], lmList[8][2]
         cx, cy = (x1 + x2) // 2, (y1 + y2) // 2
@@ -64,10 +64,12 @@ while True:
         angleBar = np.interp(length, [minHand, maxHand], [400, 150])
         angleDeg = np.interp(length, [minHand, maxHand], [0, 180])   # degree angle 0 - 180
 
+        # Convert angledeg to level volume
         maxVol = -62.25
         angleDegStep = maxVol / 180
         valVol = maxVol - (angleDeg * angleDegStep)        
-        volume.SetMasterVolumeLevel(valVol, None)
+        #volume.SetMasterVolumeLevel(valVol, None)
+        angleVol = math.floor(angleDeg / (180 / 100))
         
         last_angle=angle
         last_length=length
@@ -77,7 +79,7 @@ while True:
  
     cv2.rectangle(img, (50, 150), (85, 400), (255, 0, 0), 3)
     cv2.rectangle(img, (50, int(angleBar)), (85, 400), (255, 0, 0), cv2.FILLED)
-    cv2.putText(img, f'{int(angleDeg)} deg', (40, 90), cv2.FONT_HERSHEY_COMPLEX,2, (0, 9, 255), 3)
+    cv2.putText(img, f'Vol.{int(angleVol)}', (40, 90), cv2.FONT_HERSHEY_COMPLEX,2, (0, 9, 255), 3)
  
     cv2.imshow("Img", img)
     cv2.waitKey(1)
