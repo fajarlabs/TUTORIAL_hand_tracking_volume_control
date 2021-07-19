@@ -1,4 +1,5 @@
 # Volume control system using gestures
+![Demo File](https://github.com/fajarlabs/TUTORIAL_hand_tracking_volume_control/blob/master/demo.gif)
 In this project we are going to learn how to use Gesture Control to change the volume of a computer. 
 We first look into hand tracking and then we will use the hand landmarks to find gesture of our hand to change the volume.
 
