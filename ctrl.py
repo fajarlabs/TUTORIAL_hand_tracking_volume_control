@@ -68,7 +68,7 @@ while True:
         maxVol = -62.25
         angleDegStep = maxVol / 180
         valVol = maxVol - (angleDeg * angleDegStep)        
-        #volume.SetMasterVolumeLevel(valVol, None)
+        volume.SetMasterVolumeLevel(valVol, None)
         angleVol = math.floor(angleDeg / (180 / 100))
         
         last_angle=angle
